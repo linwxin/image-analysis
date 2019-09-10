@@ -34,10 +34,10 @@ public class Demo {
     @PostMapping(value = "upload")
     @ResponseBody
     public HttpRequest upload(MultipartFile file) {
-        String fileName = file.getOriginalFilename();
-        String suffixName = fileName.substring(fileName.lastIndexOf("."));
-        //String path = Thread.currentThread().getContextClassLoader().getResource("").getPath()+"static";
-        String path = System.getProperty("user.dir") + "\\src\\main\\resources\\static";
+        String fileName = file.getOriginalFilename();//获取最初文件名
+        String suffixName = fileName.substring(fileName.lastIndexOf("."));//获取后缀.jpg
+        //String path = Thread.currentThread().getContextClassLoader().getResource("").getPath()+"static";//获取绝对路径
+        String path = System.getProperty("user.dir") + "\\src\\main\\resources\\static";//获取绝对路径
         path = path + fileDir;
         path = path.replace("/", "\\");
         fileName = UUID.randomUUID() + suffixName;
@@ -49,7 +49,7 @@ public class Demo {
             e.printStackTrace();
         }
         String imgUrl = path + fileName;
-        return new HttpRequest(true, imgUrl);
+        return new HttpRequest(true, imgUrl);//假装传了imgUrl, 其实没屁用
     }
 
     @PostMapping(value = "test")
